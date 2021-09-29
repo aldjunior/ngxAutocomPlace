@@ -30,10 +30,11 @@ export class NgxAutocomPlaceService {
     });
   }
 
-  getPlaceDetails(placeId: string): Promise<google.maps.places.PlaceResult> {
+  getPlaceDetails(placeId: string, fields: string[]): Promise<google.maps.places.PlaceResult> {
     return new Promise((resolve, reject) => {
       this.placeService.getDetails({
         placeId,
+        fields,
         sessionToken: this.sessionToken,
       }, (result, status) => {
         this.sessionToken = null;

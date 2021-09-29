@@ -103,15 +103,16 @@ export class NgxAutocomPlaceDirective implements OnInit, OnDestroy {
     item.appendChild(spanIcon);
     item.appendChild(spanContentMatch);
     item.appendChild(spanCity);
+    const fields: string[] = ["place_id", "formatted_address", "address_components"];
     item.addEventListener('click', () => {
-      this.getPlaceDetails(placeId);
+      this.getPlaceDetails(placeId, fields);
     });
 
     return item;
   }
 
-  getPlaceDetails(placeId: string) {
-    this.ngxAutocomplaceService.getPlaceDetails(placeId).then((result) => {
+  getPlaceDetails(placeId: string, fields: string[]) {
+    this.ngxAutocomplaceService.getPlaceDetails(placeId, fields).then((result) => {
       // this.inputElement.value = result.formatted_address;
       // this.inputElement.blur();
       this.selectedPlace.emit(result);
@@ -147,7 +148,7 @@ export class NgxAutocomPlaceDirective implements OnInit, OnDestroy {
     if (this.handleEnterKeydown) {
       if (e.key === 'Enter' || e.keyCode === 13) {
         if (this.results && this.results.length > 0) {
-          this.getPlaceDetails(this.results[this.downArrowIndex > -1 ? this.downArrowIndex : 0].place_id);
+          this.getPlaceDetails(this.results[this.downArrowIndex > -1 ? this.downArrowIndex : 0].place_id, ["place_id", "formatted_address", "address_components"]);
           this.removePacItems();
         }
       }
