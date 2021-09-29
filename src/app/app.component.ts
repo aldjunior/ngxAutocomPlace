@@ -11,7 +11,7 @@ export class AppComponent {
   json = JSON;
   options = {
     componentRestrictions: {
-      country: 'fr'
+      country: 'br'
     }
   }
 
